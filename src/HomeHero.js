@@ -1,9 +1,8 @@
-const HomeHero = (/*props*/ { cars, subtitle }) => {
+const HomeHero = (/*props*/ { cars }) => {
   //   const cars = props.cars;
   //   const subtitle = props.subtitle;
   return (
     <div className="homeHero">
-      <h2>{subtitle}</h2>
       {cars.map((car, id) => {
         return (
           <div className="blog-preview" key={id}>
