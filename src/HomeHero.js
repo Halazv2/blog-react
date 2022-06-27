@@ -1,4 +1,4 @@
-const HomeHero = (/*props*/ { cars, subtitle,handdleDelete }) => {
+const HomeHero = (/*props*/ { cars, subtitle }) => {
   //   const cars = props.cars;
   //   const subtitle = props.subtitle;
   return (
@@ -7,13 +7,9 @@ const HomeHero = (/*props*/ { cars, subtitle,handdleDelete }) => {
       {cars.map((car, id) => {
         return (
           <div className="blog-preview" key={id}>
-            <h1>{car.carName}</h1>
-            <p>{car.type}</p>
-            <p>Price: {car.price}</p>
-            <p>Price: {car.id}</p>
-            <button onClick={()=>handdleDelete(car.id)}>
-              Delete
-            </button>
+            <h1>{car.Name}</h1>
+            <p>{car.Origin}</p>
+            <p>Year: {car.Year}</p>
           </div>
         );
       })}

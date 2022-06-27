@@ -1,5 +1,5 @@
+import { useState, useEffect } from "react";
 import HomeHero from "./HomeHero";
-import { useState } from "react";
 const Home = () => {
   const [name, setName] = useState("Mekna007");
   const [age, setAge] = useState(20);
@@ -11,37 +11,26 @@ const Home = () => {
     setAge(21);
   };
 
-  const [cars, setCars] = useState([
-    {
-      id : 1,
-      carName: "BMW",
-      type: "SUV",
-      price: "$1,000,000",
-      use: "Private",
-    },
-    {
-      id : 2,
-      carName: "Audi",
-      type: "SUV",
-      price: "$1,000,000",
-      use: "Private",
-    },
-    {
-      id : 3,
-      carName: "Mercedes",
-      type: "SUV",
-      price: "$1,000,000",
-      use: "Public",
-    },
-  ]);
-  const handdleDelete = (id) => {
-    const newCars = cars.filter((car) => car.id !== id);
-    setCars(newCars);
-  };
+  const [cars, setCars] = useState([]);
+  useEffect(() => {
+    // console.log("use effect ran");
+    // console.log(name);
+    fetch("http://localhost:8000/cars")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setCars(data);
+      });
+  }, []); // the name is dependancy when it changes it will run the use effect
+
   return (
     <div className="content">
       <h1>{title}</h1>
       <button onClick={handdleClick} style={{ display: "none" }}>
+        Click me
+      </button>
+      <button onClick={() => setName("Hafid")} style={{ display: "none" }}>
         Click me
       </button>
       <p>
@@ -50,16 +39,17 @@ const Home = () => {
         blog for him using React. <br />
         <b>May he rest in peace ❤️</b>
       </p>
-      <HomeHero
-        cars={cars}
-        subtitle="Best cars for you!"
-        handdleDelete={handdleDelete}
-      />
-      <HomeHero
+      {cars && (
+        <HomeHero
+          cars={cars}
+          subtitle="Best cars for you!"
+        />
+      )}
+      {/* <HomeHero
         cars={cars.filter((car) => car.use === "Private")}
         subtitle="Best Private cars"
         handdleDelete={handdleDelete}
-      />
+      /> */}
     </div>
   );
 };
