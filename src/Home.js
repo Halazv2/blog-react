@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import HomeHero from "./HomeHero";
+import  useFetch  from "./useFetch";
 const Home = () => {
   // const [name, setName] = useState("Mekna007");
   // const [age, setAge] = useState(20);
@@ -10,36 +10,8 @@ const Home = () => {
   //   setName("Mekna007");
   //   setAge(21);
   // };
-
-  const [cars, setCars] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  useEffect(
-    () => {
-      setTimeout(() => {
-        fetch("http://localhost:8000/cars")
-          .then((res) => {
-            if (!res.ok) {
-              throw Error("Something went wrong");
-            }
-            return res.json();
-          })
-          .then((data) => {
-            setCars(data);
-            setLoading(false);
-            setError(null);
-          })
-          .catch((err) => {
-            setError(err);
-            setLoading(false);
-            setCars(null);
-          });
-      }, 1000);
-    },
-    [
-      /*name*/
-    ]
-  ); // the name is dependancy when it changes it will run the use effect
+  const url = "http://localhost:8000/cars";
+  const { cars, loading, error } = useFetch(url);
 
   return (
     <div className="content">
@@ -53,11 +25,6 @@ const Home = () => {
           <HomeHero cars={cars} />
         </div>
       )}
-      {/* <HomeHero
-        cars={cars.filter((car) => car.use === "Private")}
-        subtitle="Best Private cars"
-        handdleDelete={handdleDelete}
-      /> */}
     </div>
   );
 };
