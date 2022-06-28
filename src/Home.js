@@ -1,5 +1,5 @@
 import HomeHero from "./HomeHero";
-import  useFetch  from "./useFetch";
+import useFetch from "./useFetch";
 const Home = () => {
   // const [name, setName] = useState("Mekna007");
   // const [age, setAge] = useState(20);
@@ -14,7 +14,7 @@ const Home = () => {
   const { cars, loading, error } = useFetch(url);
 
   return (
-    <div className="content">
+    <div>
       {error && <h1>{error.message}</h1>}
       {loading && <h1>loading..</h1>}
 
