@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 const Create = () => {
   const [Name, setName] = useState("");
   const [Origin, setOrigin] = useState("");
   const [Year, setYear] = useState("");
   const [Description, setDescription] = useState("");
   const [isPanding, setPanding] = useState(false);
+  const history = useHistory();
   const empty = () => {
     setName("");
     setOrigin("");
@@ -26,6 +28,7 @@ const Create = () => {
         setPanding(false);
       }, 1000);
       empty();
+      history.push("/");
     });
   };
   return (
